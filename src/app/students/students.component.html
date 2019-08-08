@@ -1,0 +1,20 @@
+<h1>Students</h1>
+
+<div [hidden]="!isFetching">
+    <p>Loading...</p>
+</div>
+
+<div [hidden]="isFetching">
+    <select #filter>
+        <option>--Select Gender--</option>
+        <option>male</option>
+        <option>female</option>
+    </select>
+    <button (click)="onFilter(filter.value)">Filter</button>
+    <button [disabled]="filter.selectedIndex==0" (click)="onFilter('reset'); filter.selectedIndex=0">Reset</button>
+    <ul>
+        <li *ngFor="let student of students">
+            <h2><a routerLink="/students/{{student.id}}">{{student.firstname}} {{student.lastname}} - {{student.gender}}</a></h2>
+        </li>
+    </ul>
+</div>

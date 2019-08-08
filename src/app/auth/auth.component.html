@@ -1,0 +1,27 @@
+<p>
+    <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+    <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+</p>
+
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <fieldset [disabled]="isAuthenticating">
+        <fieldset>
+            <input formControlName="email" placeholder="E-mail" type="text" />
+        </fieldset>
+        <fieldset>
+            <input formControlName="password" placeholder="Password" type="password" />
+        </fieldset>
+        <fieldset *ngIf="authType == 'register'">
+            <input formControlName="gender" placeholder="Gender" type="text" />
+        </fieldset>
+        <fieldset *ngIf="authType == 'register'">
+            <input formControlName="firstname" placeholder="First Name" type="text" />
+        </fieldset>
+        <fieldset *ngIf="authType == 'register'">
+            <input formControlName="lastname" placeholder="Last Name" type="text" />
+        </fieldset>
+        <button [disabled]="!authForm.valid" type="submit">
+            {{authType}}
+        </button>
+    </fieldset>
+</form>
