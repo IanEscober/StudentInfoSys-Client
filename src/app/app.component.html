@@ -1,14 +1,16 @@
-<div>
-  <h1>
-    {{ title }}
-  </h1>
-</div>
-
-<div [hidden]="!isFetching">
-  <p>Loading...</p>
-</div>
-
-<div [hidden]="isFetching">
-  <button [hidden]="!(isAuthenticated$ | async)" (click)="onLogout()">Logout</button>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-auto mr-auto">
+      <h1>{{ title }}</h1>
+    </div>
+    <div class="col-auto">
+      <div [hidden]="isFetching">
+        <button [hidden]="!(isAuthenticated$ | async)" (click)="onLogout()" class="btn btn-secondary">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="!isFetching">
+    <p>Loading...</p>
+  </div>
   <router-outlet></router-outlet>
 </div>

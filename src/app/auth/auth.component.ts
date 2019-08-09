@@ -24,8 +24,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) {
     this.authForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
+      'email': ['', [Validators.required, Validators.email]],
+      'password': ['', [Validators.required, Validators.minLength(5)]]
     })
   }
 
@@ -33,9 +33,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.route.url.subscribe(url => {
       this.authType = url[url.length - 1].path;
       if (this.authType === 'register') {
-        this.authForm.addControl('gender', new FormControl('', Validators.required));
-        this.authForm.addControl('firstname', new FormControl('', Validators.required));
-        this.authForm.addControl('lastname', new FormControl('', Validators.required));
+        this.authForm.addControl('gender', new FormControl('', [Validators.required, Validators.minLength(4)]));
+        this.authForm.addControl('firstname', new FormControl('', [Validators.required, Validators.minLength(4)]));
+        this.authForm.addControl('lastname', new FormControl('', [Validators.required, Validators.minLength(4)]));
       }
     });
 
@@ -67,15 +67,25 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authService.authenticate(credentials)
       .subscribe(
         user => this.currentUser = user,
-        error => this.authService.dismiss()
+        error => {
+          this.authService.dismiss();
+          this.isAuthenticating = false;
+        }
       );
+  }
+
+  isActive(type: string): boolean {
+    return type === this.authType;
   }
 
   register(credentials: User) {
     this.authService.register(credentials)
       .subscribe(
         user => this.currentUser = user,
-        error => this.authService.dismiss()
+        error => {
+          this.authService.dismiss();
+          this.isAuthenticating = false;
+        }
       );
   }
 

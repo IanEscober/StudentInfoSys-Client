@@ -28,7 +28,7 @@ export class RepositoryService {
   }
 
   post<T>(url: string, data: object = {}): Observable<T> {
-    return this.http.post<T>(url, JSON.stringify(data))
+    return this.http.post<T>(url, data)
       .pipe(
         retry(3),
         catchError(this.handleError)

@@ -1,20 +1,31 @@
-<h1>Students</h1>
+<div class="container">
+    <h1>Students</h1>
 
-<div [hidden]="!isFetching">
-    <p>Loading...</p>
-</div>
+    <div [hidden]="!isFetching">
+        <p>Loading...</p>
+    </div>
 
-<div [hidden]="isFetching">
-    <select #filter>
-        <option>--Select Gender--</option>
-        <option>male</option>
-        <option>female</option>
-    </select>
-    <button (click)="onFilter(filter.value)">Filter</button>
-    <button [disabled]="filter.selectedIndex==0" (click)="onFilter('reset'); filter.selectedIndex=0">Reset</button>
-    <ul>
-        <li *ngFor="let student of students">
-            <h2><a routerLink="/students/{{student.id}}">{{student.firstname}} {{student.lastname}} - {{student.gender}}</a></h2>
-        </li>
-    </ul>
+    <div [hidden]="isFetching">
+        <div class="row row-margin">
+            <div class="col-sm">
+                <select #filter class="custom-select">
+                    <option>--Select Gender--</option>
+                    <option>male</option>
+                    <option>female</option>
+                </select>
+            </div>
+            <div class="col-sm">
+                <button (click)="onFilter(filter.value)" class="btn btn-primary">Filter</button>
+                <button [disabled]="filter.selectedIndex==0" (click)="onFilter('reset'); filter.selectedIndex=0"
+                    class="btn btn-primary btn-margin">Reset</button>
+            </div>
+        </div>
+
+        <div class="list-group">
+            <a *ngFor="let student of students" routerLink="/students/{{student.id}}"
+                class="list-group-item list-group-item-action">
+                {{student.firstname}} {{student.lastname}} - {{student.gender}}
+            </a>
+        </div>
+    </div>
 </div>

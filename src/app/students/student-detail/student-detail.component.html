@@ -1,27 +1,30 @@
-<h1>Student</h1>
-
-<h2>{{student.firstname}}</h2>
-<h2>{{student.lastname}}</h2>
-<p>{{student.gender}}</p>
-
-<ul>
-    <h2>Enrolled Courses</h2>
-    <ul>
-        <li *ngFor="let enrolledCourse of enrolledCourses">
-            <p>{{enrolledCourse.name}}</p>
-            <button (click)="onRemoveCourse(enrolledCourse)">Remove</button>
-        </li>
-    </ul>
-</ul>
-
-<ul>
-    <h2>Available Courses</h2>
-    <ul>
-        <li *ngFor="let availableCourse of availableCourses">
-            <p>{{availableCourse.name}}</p>
-            <button (click)="onAddCourse(availableCourse)">Add</button>
-        </li>
-    </ul>
-</ul>
-
-<button (click)="onBack()">Back</button>
+<div class="container">
+    <div class="row">
+        <div class="col align-self-center">
+            <h2>Student</h2>
+            <h3>Name: {{student.firstname}} {{student.lastname}}</h3>
+            <h3>Gender: {{student.gender}}</h3>
+        </div>
+        <div class="col">
+            <p>Enrolled Courses</p>
+            <div class="list-group">
+                <a *ngFor="let enrolledCourse of enrolledCourses">
+                    <p>{{enrolledCourse.name}}</p>
+                    <button (click)="onRemoveCourse(enrolledCourse)" class="btn btn-danger">Remove</button>
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <p>Available Courses</p>
+            <div class="list-group">
+                <a *ngFor="let availableCourse of availableCourses">
+                    <p>{{availableCourse.name}}</p>
+                    <button (click)="onAddCourse(availableCourse)" class="btn btn-success">Add</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button (click)="onBack()" class="btn btn-primary">Back</button>
+    </div>
+</div>

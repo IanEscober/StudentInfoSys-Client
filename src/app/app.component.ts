@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
     this.authService.initialize()
       .subscribe(withCredentials => {
-        if(withCredentials) {
+        if (withCredentials) {
           this.router.navigateByUrl('/students');
         } else {
           this.router.navigateByUrl('/register');
