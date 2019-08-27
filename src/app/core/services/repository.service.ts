@@ -5,7 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 @Injectable()
 export class RepositoryService {
-  baseUrl = 'https://ys-training-api.herokuapp.com/api/';
+  baseUrl = 'https://localhost:5001/api/';
 
   constructor(private http: HttpClient) { }
 
